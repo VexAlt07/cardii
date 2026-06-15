@@ -734,6 +734,15 @@ body.sidebar-open { overflow: hidden; }
   gap: 4px;
 }
 
+.drive-import-btn {
+  width: 100%;
+  text-align: left;
+  font-size: 12.5px;
+  color: var(--accent);
+  padding: 3px 6px;
+}
+.drive-import-btn:hover { color: var(--accent-h); background: var(--border); }
+
 /* ── TOAST ──────────────────────────────────────────────────── */
 .toast {
   position: fixed;
