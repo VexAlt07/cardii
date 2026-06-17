@@ -313,6 +313,7 @@ function renderFolderView(folder) {
     tile.querySelector('[data-delete]').addEventListener('click', e => { e.stopPropagation(); confirmDeleteCard(card.id); });
     grid.appendChild(tile);
   });
+  renderMath(grid);
 }
 
 function renderMatiereStats(matiereId) {
@@ -630,8 +631,9 @@ function startStudy() {
 
 function updateStudyCard() {
   const card = studyCards[studyIndex];
-  document.getElementById('study-front').textContent = card.front;
-  document.getElementById('study-back').textContent  = card.back;
+  document.getElementById('study-front').innerHTML = esc(card.front);
+  document.getElementById('study-back').innerHTML  = esc(card.back);
+  renderMath(document.getElementById('study-card'));
 
   studyFlipped = false;
   document.getElementById('study-card').classList.remove('flipped');
@@ -1036,6 +1038,19 @@ function closeSidebar() { document.getElementById('sidebar').classList.remove('o
 // ── ESCAPE HTML ───────────────────────────────────────────────
 function esc(str) {
   return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+// Rend le LaTeX ($..$ et $$..$$) dans un élément donné via KaTeX
+function renderMath(el) {
+  if (window.renderMathInElement) {
+    renderMathInElement(el, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+      ],
+      throwOnError: false,
+    });
+  }
 }
 
 // ── EVENTS ───────────────────────────────────────────────────
