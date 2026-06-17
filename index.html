@@ -9,9 +9,30 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+
+  <!-- Lien vers le Manifest -->
+<link rel="manifest" href="/manifest.json">
+
+<!-- Spécial pour iOS (Apple est capricieux, il lui faut sa propre ligne pour l'icône) -->
+<link rel="apple-touch-icon" href="/icon_mobile.png">
+<meta name="theme-color" content="#000000">
 </head>
 <body>
 
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+        .then(registration => {
+          console.log('Service Worker enregistré avec succès');
+        })
+        .catch(err => {
+          console.log('Erreur Service Worker', err);
+        });
+    });
+  }
+</script>
+  
   <button id="btn-menu" class="icon-btn mobile-menu-btn" title="Menu" aria-label="Ouvrir le menu">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
   </button>
